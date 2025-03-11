@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Letter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fafafa;
+            font-family: 'Georgia', serif;
+            color: #4a4a4a;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #envelope {
+            cursor: pointer;
+            width: 160px;
+            height: 120px;
+            background: #b56576;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        #envelope:hover {
+            transform: scale(1.1);
+        }
+
+        #envelope span {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        #lockScreen {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        #letter {
+            display: none;
+            background: #fff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+
+            background: repeating-linear-gradient(
+                white, white 30px,
+                #add8e6 30px, #add8e6 31px
+            );
+            border-left: 3px solid #ff6347;
+        }
+
+        h1 {
+            color: #b56576;
+            font-size: 32px;
+        }
+
+        .input-container {
+            margin: 20px 0;
+        }
+
+        input[type="password"] {
+            padding: 12px;
+            border: 2px solid #b56576;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 18px;
+            outline: none;
+            width: 250px;
+            margin-bottom: 15px; /* Added margin to create space */
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            background-color: #b56576;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #9d4a5c;
+        }
+
+        @keyframes falling-hearts {
+            0% { transform: translateY(0) rotate(0); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff5a5f;
+            font-size: 24px;
+            animation: falling-hearts linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="envelope" onclick="openEnvelope()">
+            <span>📩 Open Me</span>
+        </div>
+
+        <div id="lockScreen">
+            <h1>Kailan Annniversary natin?</h1>
+           
+            <div class="input-container">
+                <input type="password" id="password" placeholder="Sagot wa, bagal">
+                <button onclick="checkPassword()">Submit</button>
+            </div>
+        </div>
+
+        <div id="letter">
+            <h1>Happy Monthsary, Mahal! 💖❤️</h1>
+            <p>Every moment with you feels like a beautiful dream I never want to wake up from. You bring so much joy, love, and light into my life, and I’m grateful for every smile, every laugh, and every memory we share.</p>
+            <p>With each passing day, my love for you only grows stronger. Thank you for being by my side, for your kindness, and for making every moment special. I’m so lucky to call you mine, and I can’t wait to create even more beautiful memories together.</p>
+            <p>No words can truly capture how much you mean to me—but know that my heart is yours, today and always.</p>
+            <p>I love you more than words can express. Here’s to us and to many more months of love and happiness.  🌹❤️</p>
+
+            <p>Forever Yours,</p>
+            <p>Kent Andrew</p>
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.getElementById('envelope').style.display = 'none';
+            document.getElementById('lockScreen').style.display = 'block';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === '051223') {
+                document.getElementById('lockScreen').style.display = 'none';
+                document.getElementById('letter').style.display = 'block';
+                createFallingHearts();
+            } else {
+                alert('Mali ang sagot, subukan muli!');
+            }
+        }
+
+        function createFallingHearts() {
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }
+        }
+    </script>
+</body>
+</html>
